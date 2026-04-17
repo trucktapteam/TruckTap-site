@@ -77,17 +77,25 @@
       padding: 10px 0 8px;
     }
 
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      flex-shrink: 0;
-    }
+   .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+}
 
-    .brand img {
-  width: 180px;
+.brand img {
+  width: 110px;
   height: auto;
   display: block;
-  filter: drop-shadow(0 14px 24px rgba(0,0,0,.18));
+  filter: drop-shadow(0 12px 22px rgba(0,0,0,.18));
+}
+
+.brand span {
+  font-size: 52px;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  color: #0f172a;
+  line-height: 1;
 }
 
     .nav-links {
@@ -550,8 +558,9 @@
   <div class="container">
     <nav class="nav">
       <a href="#" class="brand">
-        <img src="TruckTapNoText-Picsart-BackgroundRemover.png" alt="TruckTap logo" />
-      </a>
+  <img src="TruckTapNoText-Picsart-BackgroundRemover.png" alt="TruckTap logo" />
+  <span>TruckTap</span>
+</a>
 
       <div class="nav-links">
         <a href="#why">Why TruckTap</a>
