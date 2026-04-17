@@ -549,33 +549,60 @@
         grid-template-columns: 1fr;
       }
 
-      .brand img {
-    width: 220px;
-    height: auto;
-    display: block;
-    filter: drop-shadow(0 12px 22px rgba(0,0,0,.18));
+     .brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
 }
+
+.brand img {
+  width: 64px;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,.12));
+}
+
+.brand span {
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
+  color: #111827;
+}
+
+.brand-accent {
+  color: #f97316;
+} 
+
+      @media (max-width: 768px) {
+  .brand img {
+    width: 48px;
+  }
+
+  .brand span {
+    font-size: 1.6rem;
+  }
+}
+
     }
   </style>
 </head>
 <body>
   <div class="container">
     <nav class="nav">
-      <a href="#" class="brand">
   <a href="#" class="brand">
-  <img src="TruckTapNoText-Picsart-BackgroundRemover.png" alt="TruckTap logo" />
-  <span>Truck<span class="brand-accent">Tap</span></span>
-</a>
+    <img src="TruckTapNoText-Picsart-BackgroundRemover.png" alt="TruckTap logo" />
+    <span>Truck<span class="brand-accent">Tap</span></span>
+  </a>
 
-      <div class="nav-links">
-        <a href="#why">Why TruckTap</a>
-        <a href="#how">How It Works</a>
-        <a href="#screens">Screenshots</a>
-        <a href="#owners">For Owners</a>
-        <a href="https://www.facebook.com/profile.php?id=61574337256977" target="_blank" rel="noopener noreferrer">Facebook</a>
-      </div>
-    </nav>
-
+  <div class="nav-links">
+    <a href="#why">Why TruckTap</a>
+    <a href="#how">How It Works</a>
+    <a href="#screens">Screenshots</a>
+    <a href="#owners">For Owners</a>
+    <a href="https://www.facebook.com/profile.php?id=61574337256977" target="_blank" rel="noopener noreferrer">Facebook</a>
+  </div>
+</nav>
     <section class="hero">
       <div class="hero-copy">
         <div class="eyebrow">📍 Built for real-world food truck discovery</div>
