@@ -42,18 +42,23 @@
     /* App Store Buttons */
 .store-buttons {
   display: flex;
+  gap: 18px;
   flex-wrap: wrap;
-  gap: 16px;
-  justify-content: center;
-  margin: 28px 0 18px;
+  justify-content: flex-start;
+  margin-bottom: 20px;
 }
 
-.store-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  justify-content: flex-start;
-  margin: 22px 0 18px;
+.store-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 28px;
+  border-radius: 18px;
+  font-weight: 900;
+  font-size: 20px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  min-width: 280px;
 }
 
 /* Apple */
@@ -69,10 +74,9 @@
 }
 
 .store-button:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
   opacity: 0.9;
 }
-
     html {
       scroll-behavior: smooth;
     }
@@ -639,6 +643,14 @@
 </nav>
     <section class="hero">
       <div class="hero-copy">
+        <div class="store-buttons">
+  <a class="store-button apple" href="https://apps.apple.com/us/app/trucktap/id6762240100" target="_blank">
+    🍎 Download on the App Store
+  </a>
+  <a class="store-button google" href="https://play.google.com/store/apps/details?id=app.rork.trucktap_food_truck_finder_cqgko70&hl=en_US" target="_blank">
+    ▶ Get it on Google Play
+  </a>
+</div>
         <div class="eyebrow">📍 Built for real-world food truck discovery</div>
 
         <h1>Find food trucks that are actually open.</h1>
