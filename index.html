@@ -39,6 +39,45 @@
       padding: 0;
     }
 
+    /* App Store Buttons */
+.store-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  margin: 28px 0 18px;
+}
+
+.store-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 260px;
+  padding: 18px 24px;
+  border-radius: 16px;
+  font-weight: 800;
+  font-size: 18px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+/* Apple */
+.store-button.apple {
+  background: #000;
+  color: #fff;
+}
+
+/* Google */
+.store-button.google {
+  background: #ff6a00;
+  color: #111;
+}
+
+.store-button:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
     html {
       scroll-behavior: smooth;
     }
@@ -617,11 +656,18 @@
         </p>
 
        <div class="cta-row">
-  <a href="https://www.facebook.com/profile.php?id=61574337256977" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Follow Launch Updates</a>
+  <a href="https://www.facebook.com/trucktap" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Follow Launch Updates</a>
   <a href="#how" class="btn btn-secondary">See How It Works</a>
 </div>
         
-
+<div class="store-buttons">
+  <a class="store-button apple" href="https://apps.apple.com/us/app/trucktap/id6762240100" target="_blank">
+    🍎 Download on the App Store
+  </a>
+  <a class="store-button google" href="https://play.google.com/store/apps/details?id=app.rork.trucktap_food_truck_finder_cqgko70&hl=en_US" target="_blank">
+    ▶ Get it on Google Play
+  </a>
+</div>
        <p class="facebook-note">
   TestFlight is now open for iPhone testing. Android launch updates coming soon.
 </p>
