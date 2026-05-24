@@ -130,10 +130,47 @@
 
     .nav-links a {
       white-space: nowrap;
+      transition: color 0.18s ease, transform 0.18s ease;
     }
 
     .nav-links a:hover {
       color: var(--orange-dark);
+      transform: translateY(-1px);
+    }
+
+    .nav-social {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 13px;
+      color: #431407;
+      background: var(--cream-2);
+      border: 1px solid rgba(249, 115, 22, 0.32);
+      border-radius: 999px;
+      box-shadow: 0 10px 24px rgba(249, 115, 22, 0.12);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
+    }
+
+    .nav-social::before {
+      content: "f";
+      display: grid;
+      place-items: center;
+      width: 20px;
+      height: 20px;
+      color: var(--white);
+      background: var(--orange);
+      border-radius: 999px;
+      font-size: 0.86rem;
+      font-weight: 950;
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1;
+    }
+
+    .nav-social:hover {
+      color: #431407;
+      background: #fed7aa;
+      box-shadow: 0 14px 30px rgba(249, 115, 22, 0.2);
+      transform: translateY(-2px) rotate(-0.5deg);
     }
 
     .section {
@@ -158,9 +195,21 @@
         radial-gradient(circle at 88% 10%, rgba(249, 115, 22, 0.45), transparent 28%),
         radial-gradient(circle at 6% 92%, rgba(250, 204, 21, 0.24), transparent 26%),
         linear-gradient(135deg, #090d16 0%, #111827 55%, #1f2937 100%);
+      background-size: 130% 130%, 140% 140%, 100% 100%;
       border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 36px;
       box-shadow: 0 34px 90px rgba(17, 24, 39, 0.34);
+      animation: heroGlow 14s ease-in-out infinite alternate;
+    }
+
+    @keyframes heroGlow {
+      0% {
+        background-position: 88% 10%, 6% 92%, center;
+      }
+
+      100% {
+        background-position: 78% 20%, 14% 84%, center;
+      }
     }
 
     .hero::before,
@@ -252,7 +301,7 @@
       align-items: center;
       justify-content: center;
       border: 2px solid transparent;
-      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
     }
 
     .store-badge {
@@ -316,6 +365,61 @@
       border-radius: 999px;
     }
 
+    .hero-community-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      max-width: 520px;
+      margin-top: 16px;
+      padding: 12px 14px;
+      color: rgba(255, 255, 255, 0.78);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(249, 115, 22, 0.26);
+      border-radius: 18px;
+      box-shadow: 0 16px 34px rgba(0, 0, 0, 0.16);
+      backdrop-filter: blur(10px);
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease, background 0.22s ease;
+    }
+
+    .hero-community-link::before {
+      content: "f";
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      width: 32px;
+      height: 32px;
+      color: var(--white);
+      background: var(--orange);
+      border: 2px solid rgba(255, 255, 255, 0.22);
+      border-radius: 999px;
+      font-size: 1.05rem;
+      font-weight: 950;
+      box-shadow: 0 0 24px rgba(249, 115, 22, 0.32);
+    }
+
+    .hero-community-link strong {
+      display: block;
+      color: var(--white);
+      font-size: 0.98rem;
+      line-height: 1.1;
+    }
+
+    .hero-community-link span {
+      display: block;
+      margin-top: 2px;
+      font-size: 0.9rem;
+      line-height: 1.25;
+    }
+
+    .hero-community-link:hover {
+      background: rgba(255, 255, 255, 0.11);
+      border-color: rgba(249, 115, 22, 0.46);
+      box-shadow:
+        0 20px 42px rgba(0, 0, 0, 0.22),
+        0 0 28px rgba(249, 115, 22, 0.16);
+      transform: translateY(-3px) rotate(-0.35deg);
+    }
+
     .hero-media {
       min-height: 560px;
     }
@@ -323,6 +427,19 @@
     .phone-collage {
       position: relative;
       height: 560px;
+      animation: phoneFloat 7s ease-in-out infinite;
+      transform-origin: center;
+    }
+
+    @keyframes phoneFloat {
+      0%,
+      100% {
+        transform: translate3d(0, 0, 0) rotate(0deg);
+      }
+
+      50% {
+        transform: translate3d(0, -10px, 0) rotate(0.4deg);
+      }
     }
 
     .phone-card,
@@ -332,6 +449,7 @@
       background: var(--white);
       border: 9px solid #050505;
       box-shadow: 0 30px 70px rgba(0, 0, 0, 0.45);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
 
     .phone-card {
@@ -340,6 +458,11 @@
       width: min(72%, 330px);
       border-radius: 34px;
       transform: rotate(-5deg);
+    }
+
+    .phone-card:hover {
+      transform: translateY(-5px) rotate(-3deg);
+      box-shadow: 0 36px 80px rgba(0, 0, 0, 0.52);
     }
 
     .phone-card::before {
@@ -374,11 +497,19 @@
       transform: rotate(7deg);
     }
 
+    .shot-a:hover {
+      transform: translateY(-5px) rotate(5deg);
+    }
+
     .shot-b {
       right: 10%;
       bottom: 20px;
       width: 48%;
       transform: rotate(-3deg);
+    }
+
+    .shot-b:hover {
+      transform: translateY(-5px) rotate(-1deg);
     }
 
     .chaos-tag {
@@ -396,6 +527,12 @@
       font-weight: 950;
       line-height: 1.15;
       transform: rotate(4deg);
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .chaos-tag:hover {
+      transform: translateY(-4px) rotate(2deg) scale(1.02);
+      box-shadow: 11px 11px 0 #050505;
     }
 
     .section-head {
@@ -443,6 +580,7 @@
       border: 1px solid var(--border);
       border-radius: 30px;
       box-shadow: var(--shadow-soft);
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
     }
 
     .compare-card {
@@ -460,6 +598,21 @@
     .compare-card.orange {
       background: var(--orange);
       transform: rotate(0.8deg);
+    }
+
+    .compare-card:hover,
+    .step-card:hover,
+    .personality-card:hover,
+    .owner-panel:hover {
+      box-shadow: var(--shadow);
+    }
+
+    .compare-card.dark:hover {
+      transform: translateY(-5px) rotate(-0.2deg);
+    }
+
+    .compare-card.orange:hover {
+      transform: translateY(-5px) rotate(0.2deg);
     }
 
     .compare-label {
@@ -521,6 +674,10 @@
       overflow: hidden;
     }
 
+    .step-card:hover {
+      transform: translateY(-6px);
+    }
+
     .step-card:nth-child(2) {
       margin-top: 26px;
     }
@@ -559,7 +716,8 @@
       border: 1px solid var(--border);
       border-radius: 30px;
       box-shadow: var(--shadow);
-      transition: transform 0.22s ease, box-shadow 0.22s ease;
+      transition: transform 0.24s ease, box-shadow 0.24s ease;
+      will-change: transform;
     }
 
     .screen-card.feature {
@@ -600,6 +758,7 @@
       border-radius: 28px;
       box-shadow: var(--shadow-soft);
       background: var(--white);
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
     }
 
     .truck-photo:first-child {
@@ -615,11 +774,22 @@
       transform: rotate(-1deg);
     }
 
+    .truck-photo:hover {
+      z-index: 1;
+      box-shadow: var(--shadow);
+      transform: translateY(-5px) rotate(0deg);
+    }
+
     .truck-photo img {
       width: 100%;
       height: 100%;
       min-height: 210px;
       object-fit: cover;
+      transition: transform 0.25s ease;
+    }
+
+    .truck-photo:hover img {
+      transform: scale(1.025);
     }
 
     .truck-photo.app-preview {
@@ -652,6 +822,11 @@
       color: var(--white);
     }
 
+    .owner-copy .section-kicker,
+    .community-copy .section-kicker {
+      color: #fdba74;
+    }
+
     .community-copy p {
       margin-top: 16px;
       color: rgba(255, 255, 255, 0.76);
@@ -673,29 +848,303 @@
       font-weight: 900;
     }
 
-    .owner-panel {
-      display: grid;
-      grid-template-columns: 0.86fr 1.14fr;
-      gap: 26px;
-      align-items: center;
-      padding: clamp(24px, 5vw, 48px);
+    .rolling-panel {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(26px, 5vw, 48px);
+      color: var(--white);
       background:
-        linear-gradient(135deg, rgba(249, 115, 22, 0.16), rgba(255, 255, 255, 0.92)),
-        var(--white);
+        radial-gradient(circle at 12% 18%, rgba(249, 115, 22, 0.44), transparent 28%),
+        radial-gradient(circle at 86% 74%, rgba(250, 204, 21, 0.18), transparent 25%),
+        linear-gradient(135deg, #080b12 0%, #111827 56%, #301508 100%);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 34px;
+      box-shadow: var(--shadow);
     }
 
-    .owner-logo {
+    .rolling-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+        linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+      background-size: 42px 42px;
+      opacity: 0.11;
+      pointer-events: none;
+    }
+
+    .rolling-head {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 20px;
+      align-items: end;
+      margin-bottom: 28px;
+    }
+
+    .rolling-head h2 {
+      color: var(--white);
+    }
+
+    .rolling-head p {
+      max-width: 660px;
+      margin-top: 14px;
+      color: rgba(255, 255, 255, 0.74);
+      font-size: 1.08rem;
+    }
+
+    .rolling-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      width: fit-content;
+      padding: 11px 14px;
+      color: #431407;
+      background: var(--gold);
+      border: 3px solid #050505;
+      border-radius: 999px;
+      box-shadow: 6px 6px 0 #050505;
+      font-size: 0.92rem;
+      font-weight: 950;
+      transform: rotate(2deg);
+      white-space: nowrap;
+    }
+
+    .rolling-badge::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      background: var(--green);
+      border-radius: 999px;
+      box-shadow: 0 0 0 5px rgba(22, 163, 74, 0.18);
+    }
+
+    .rolling-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .rolling-card {
+      position: relative;
+      display: grid;
+      grid-template-columns: 84px minmax(0, 1fr);
+      gap: 14px;
+      align-items: center;
+      min-height: 132px;
+      padding: 14px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 24px;
+      box-shadow: 0 16px 38px rgba(0, 0, 0, 0.18);
+      backdrop-filter: blur(12px);
+      transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease, background 0.24s ease;
+    }
+
+    .rolling-card::after {
+      content: "";
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 9px;
+      height: 9px;
+      background: var(--green);
+      border-radius: 999px;
+      box-shadow: 0 0 0 5px rgba(22, 163, 74, 0.14);
+    }
+
+    .rolling-card:hover {
+      z-index: 2;
+      background: rgba(255, 255, 255, 0.14);
+      border-color: rgba(249, 115, 22, 0.46);
+      box-shadow:
+        0 24px 52px rgba(0, 0, 0, 0.28),
+        0 0 34px rgba(249, 115, 22, 0.18);
+      transform: translateY(-6px) rotate(-0.4deg);
+    }
+
+    .rolling-logo {
       display: grid;
       place-items: center;
-      min-height: 310px;
-      background: #050505;
-      border-radius: 28px;
-      transform: rotate(-1.5deg);
+      width: 84px;
+      height: 84px;
+      padding: 8px;
+      background: var(--white);
+      border-radius: 20px;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
     }
 
-    .owner-logo img {
-      width: min(76%, 360px);
-      filter: drop-shadow(0 18px 30px rgba(0, 0, 0, 0.34));
+    .rolling-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .rolling-card h3 {
+      margin-bottom: 7px;
+      color: var(--white);
+      font-size: 1.05rem;
+      font-weight: 950;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+    }
+
+    .rolling-card span {
+      display: inline-flex;
+      width: fit-content;
+      padding: 6px 9px;
+      color: #ffedd5;
+      background: rgba(249, 115, 22, 0.18);
+      border: 1px solid rgba(249, 115, 22, 0.3);
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 900;
+    }
+
+    .owner-panel {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(280px, 0.82fr) minmax(0, 1.18fr);
+      gap: clamp(24px, 4vw, 44px);
+      align-items: center;
+      padding: clamp(24px, 5vw, 48px);
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(249, 115, 22, 0.48), transparent 30%),
+        radial-gradient(circle at 92% 78%, rgba(250, 204, 21, 0.22), transparent 26%),
+        linear-gradient(135deg, #090d16 0%, #111827 58%, #3b1c0c 100%);
+    }
+
+    .owner-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+        linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+      background-size: 44px 44px;
+      opacity: 0.12;
+      pointer-events: none;
+    }
+
+    .owner-panel::after {
+      content: "";
+      position: absolute;
+      right: -72px;
+      top: -60px;
+      width: 210px;
+      height: 210px;
+      border: 3px solid rgba(249, 115, 22, 0.38);
+      border-radius: 46px;
+      transform: rotate(16deg);
+      pointer-events: none;
+    }
+
+    .owner-visual {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      place-items: center;
+      padding: clamp(18px, 3vw, 28px);
+      background:
+        radial-gradient(circle at 50% 32%, rgba(249, 115, 22, 0.5), transparent 34%),
+        linear-gradient(145deg, #050505, #111827 64%, #431407);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 32px;
+      box-shadow:
+        0 30px 70px rgba(0, 0, 0, 0.34),
+        0 0 0 1px rgba(249, 115, 22, 0.18),
+        0 0 54px rgba(249, 115, 22, 0.22);
+      transform: rotate(-1.5deg);
+      overflow: hidden;
+    }
+
+    .owner-visual::before {
+      content: "GO LIVE";
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      z-index: 2;
+      padding: 8px 11px;
+      color: var(--white);
+      background: var(--orange);
+      border: 3px solid #050505;
+      border-radius: 999px;
+      box-shadow: 5px 5px 0 #050505;
+      font-size: 0.8rem;
+      font-weight: 950;
+      letter-spacing: 0.08em;
+      transform: rotate(-5deg);
+    }
+
+    .owner-visual::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: 11%;
+      width: 46%;
+      height: 15%;
+      border-radius: 999px;
+      box-shadow:
+        0 0 44px rgba(249, 115, 22, 0.72),
+        0 0 88px rgba(249, 115, 22, 0.34);
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+
+    .owner-visual img {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 355px);
+      height: auto;
+      border: 8px solid #050505;
+      border-radius: 32px;
+      box-shadow: 0 24px 55px rgba(0, 0, 0, 0.38);
+      transform: rotate(1.5deg);
+    }
+
+    .owner-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      width: fit-content;
+      margin: 0 0 16px;
+      padding: 10px 13px;
+      color: #ffedd5;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(249, 115, 22, 0.34);
+      border-radius: 999px;
+      font-size: 0.92rem;
+      font-weight: 900;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+    }
+
+    .owner-status::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      background: var(--green);
+      border-radius: 999px;
+      box-shadow: 0 0 0 5px rgba(22, 163, 74, 0.2);
+    }
+
+    .owner-copy {
+      position: relative;
+      z-index: 1;
+    }
+
+    .owner-copy h2 {
+      max-width: 700px;
+      color: var(--white);
+    }
+
+    .owner-copy p {
+      color: rgba(255, 255, 255, 0.74);
     }
 
     .owner-list {
@@ -708,11 +1157,13 @@
 
     .owner-list li {
       padding: 14px;
-      background: var(--white);
-      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.14);
       border-radius: 18px;
-      color: #374151;
+      color: rgba(255, 255, 255, 0.82);
       font-weight: 850;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+      backdrop-filter: blur(10px);
     }
 
     .personality-grid {
@@ -732,10 +1183,18 @@
       transform: rotate(-1deg);
     }
 
+    .personality-card:nth-child(1):hover {
+      transform: translateY(-5px) rotate(-0.3deg);
+    }
+
     .personality-card:nth-child(2) {
       color: var(--white);
       background: var(--navy);
       transform: rotate(1deg);
+    }
+
+    .personality-card:nth-child(2):hover {
+      transform: translateY(-5px) rotate(0.3deg);
     }
 
     .personality-card:nth-child(2) p {
@@ -745,6 +1204,10 @@
     .personality-card:nth-child(3) {
       background: var(--orange);
       transform: rotate(-0.5deg);
+    }
+
+    .personality-card:nth-child(3):hover {
+      transform: translateY(-5px) rotate(0deg);
     }
 
     .personality-card:nth-child(3) p,
@@ -774,8 +1237,9 @@
       border-radius: 28px;
       box-shadow: var(--shadow-soft);
       transform: rotate(-0.8deg);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      transition: transform 0.24s ease, box-shadow 0.24s ease;
       cursor: zoom-in;
+      will-change: transform;
     }
 
     button.seen-card {
@@ -915,19 +1379,49 @@
       color: var(--white);
       text-align: center;
       background:
-        linear-gradient(rgba(17, 24, 39, 0.48), rgba(17, 24, 39, 0.84)),
-        url("truck2.jpg") center / cover;
+        radial-gradient(circle at 18% 18%, rgba(249, 115, 22, 0.38), transparent 30%),
+        linear-gradient(135deg, rgba(5, 8, 13, 0.7), rgba(5, 8, 13, 0.9)),
+        url("trucktaptom.jpg") center / cover;
       border-radius: 36px;
       box-shadow: 0 34px 90px rgba(17, 24, 39, 0.28);
     }
 
+    .cta-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+        linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+      background-size: 42px 42px;
+      opacity: 0.15;
+      pointer-events: none;
+    }
+
+    .cta-panel::after {
+      content: "";
+      position: absolute;
+      right: -54px;
+      bottom: -54px;
+      width: 190px;
+      height: 190px;
+      border: 3px solid rgba(249, 115, 22, 0.38);
+      border-radius: 42px;
+      transform: rotate(12deg);
+      pointer-events: none;
+    }
+
     .cta-panel h2 {
+      position: relative;
+      z-index: 1;
       max-width: 820px;
       margin: 0 auto;
       color: var(--white);
     }
 
     .cta-panel p {
+      position: relative;
+      z-index: 1;
       max-width: 650px;
       margin: 16px auto 24px;
       color: rgba(255, 255, 255, 0.8);
@@ -935,7 +1429,43 @@
     }
 
     .cta-panel .button-row {
+      position: relative;
+      z-index: 1;
       justify-content: center;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+      }
+
+      .hero,
+      .phone-collage {
+        animation: none !important;
+      }
+
+      .store-badge:hover,
+      .btn:hover,
+      .screen-card:hover,
+      .seen-card:hover,
+      .truck-photo:hover,
+      .chaos-tag:hover,
+      .phone-card:hover,
+      .floating-shot:hover,
+      .compare-card:hover,
+      .step-card:hover,
+      .personality-card:hover,
+      .owner-panel:hover,
+      .rolling-card:hover,
+      .nav-social:hover,
+      .hero-community-link:hover {
+        transform: none !important;
+      }
     }
 
     .footer {
@@ -979,6 +1509,11 @@
         grid-template-columns: 1fr;
       }
 
+      .owner-visual {
+        max-width: 430px;
+        margin: 0 auto;
+      }
+
       .hero-media {
         min-height: 500px;
       }
@@ -996,6 +1531,10 @@
       .screen-card,
       .screen-card.feature {
         grid-column: auto;
+      }
+
+      .rolling-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
 
@@ -1027,12 +1566,22 @@
         max-width: 220px;
       }
 
+      .hero-community-link {
+        width: 100%;
+        align-items: flex-start;
+      }
+
       .comparison,
       .steps,
       .personality-grid,
       .seen-grid,
+      .rolling-head,
       .owner-list {
         grid-template-columns: 1fr;
+      }
+
+      .rolling-badge {
+        transform: none;
       }
 
       .seen-card.feature {
@@ -1058,7 +1607,9 @@
       .compare-card.dark,
       .compare-card.orange,
       .step-card,
-      .personality-card {
+      .personality-card,
+      .owner-visual,
+      .owner-visual img {
         transform: none;
       }
 
@@ -1128,6 +1679,21 @@
         grid-template-columns: 1fr;
       }
 
+      .rolling-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .rolling-card {
+        grid-template-columns: 72px minmax(0, 1fr);
+        min-height: 112px;
+      }
+
+      .rolling-logo {
+        width: 72px;
+        height: 72px;
+        border-radius: 18px;
+      }
+
       .seen-card,
       .seen-note {
         min-height: 240px;
@@ -1162,6 +1728,7 @@
           <a href="#community">Community</a>
           <a href="#owners">Owners</a>
           <a href="#download">Download</a>
+          <a class="nav-social" href="https://www.facebook.com/profile.php?id=61574337256977" target="_blank" rel="noopener noreferrer">Truck sightings &amp; memes</a>
         </div>
       </nav>
     </div>
@@ -1197,6 +1764,13 @@
               <span>Open-now discovery</span>
               <span>Favorite updates</span>
             </div>
+
+            <a class="hero-community-link" href="https://www.facebook.com/profile.php?id=61574337256977" target="_blank" rel="noopener noreferrer">
+              <span>
+                <strong>Follow the food truck chaos</strong>
+                Daily truck finds, posters, memes &amp; local food truck energy.
+              </span>
+            </a>
           </div>
 
           <div class="hero-media" aria-label="TruckTap app screenshot collage">
@@ -1346,25 +1920,135 @@
       </div>
     </section>
 
+    <section class="section">
+      <div class="container">
+        <div class="rolling-panel">
+          <div class="rolling-head">
+            <div>
+              <span class="section-kicker">Local trucks, live momentum</span>
+              <h2>Already Rolling with TruckTap</h2>
+              <p>
+                More trucks joining weekly. Real food trucks. Real communities. Real hungry people.
+              </p>
+            </div>
+            <div class="rolling-badge">More joining every week</div>
+          </div>
+
+          <div class="rolling-grid" aria-label="Food trucks already rolling with TruckTap">
+            <article class="rolling-card">
+              <div class="rolling-logo">
+                <img src="trucks/big papa jakes.jpg" alt="Big Papa Jakes logo" />
+              </div>
+              <div>
+                <h3>Big Papa Jakes</h3>
+                <span>Rolling soon</span>
+              </div>
+            </article>
+
+            <article class="rolling-card">
+              <div class="rolling-logo">
+                <img src="trucks/cupcake caboose.jpg" alt="Cupcake Caboose logo" />
+              </div>
+              <div>
+                <h3>Cupcake Caboose</h3>
+                <span>Sweet stops</span>
+              </div>
+            </article>
+
+            <article class="rolling-card">
+              <div class="rolling-logo">
+                <img src="trucks/eltacorico.png" alt="El Taco Rico logo" />
+              </div>
+              <div>
+                <h3>El Taco Rico</h3>
+                <span>Tacos on tap</span>
+              </div>
+            </article>
+
+            <article class="rolling-card">
+              <div class="rolling-logo">
+                <img src="trucks/everetts sweets.jpg" alt="Everetts Sweets logo" />
+              </div>
+              <div>
+                <h3>Everetts Sweets</h3>
+                <span>Dessert run</span>
+              </div>
+            </article>
+
+            <article class="rolling-card">
+              <div class="rolling-logo">
+                <img src="trucks/ice ice shavy.jpg" alt="Ice Ice Shavy logo" />
+              </div>
+              <div>
+                <h3>Ice Ice Shavy</h3>
+                <span>Cool treats</span>
+              </div>
+            </article>
+
+            <article class="rolling-card">
+              <div class="rolling-logo">
+                <img src="trucks/j mos.jpg" alt="J Mos logo" />
+              </div>
+              <div>
+                <h3>J Mos</h3>
+                <span>Local flavor</span>
+              </div>
+            </article>
+
+            <article class="rolling-card">
+              <div class="rolling-logo">
+                <img src="trucks/oktober feast1.jpg" alt="Oktober Feast logo" />
+              </div>
+              <div>
+                <h3>Oktober Feast</h3>
+                <span>Event ready</span>
+              </div>
+            </article>
+
+            <article class="rolling-card">
+              <div class="rolling-logo">
+                <img src="trucks/papa pasta.jpg" alt="Papa Pasta logo" />
+              </div>
+              <div>
+                <h3>Papa Pasta</h3>
+                <span>Pasta pop-up</span>
+              </div>
+            </article>
+
+            <article class="rolling-card">
+              <div class="rolling-logo">
+                <img src="trucks/thestationlogo.png" alt="The Station logo" />
+              </div>
+              <div>
+                <h3>The Station</h3>
+                <span>Community stop</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section" id="owners">
       <div class="container">
         <div class="owner-panel">
-          <div class="owner-logo">
-            <img src="TruckTapBlack.png" alt="TruckTap full logo" />
+          <div class="owner-visual">
+            <img src="screenshots/go-live.jpg" alt="TruckTap Go Live screen for food truck owners" />
           </div>
 
           <div class="owner-copy">
             <span class="section-kicker">For food truck owners</span>
-            <h2>Be findable when the window is open.</h2>
+            <div class="owner-status">Customers can see you now</div>
+            <h2>Tap GO LIVE. Start feeding people.</h2>
             <p>
-              TruckTap helps owners stay visible when location changes, hours shift, and customers are trying to decide where to go right now.
+              Customers cannot eat what they cannot find. Go live when you open, stay visible while you serve, and let nearby people know where the truck actually is.
             </p>
 
             <ul class="owner-list">
-              <li>Show customers where you are today.</li>
-              <li>Get discovered by nearby hungry people.</li>
-              <li>Turn updates into repeat visits.</li>
-              <li>Build a following beyond social posts.</li>
+              <li>Your truck moves. TruckTap keeps up.</li>
+              <li>Go live the moment the window opens.</li>
+              <li>Help nearby customers find you now.</li>
+              <li>Turn today&apos;s stop into the next favorite.</li>
             </ul>
           </div>
         </div>
@@ -1453,8 +2137,12 @@
             Download TruckTap and find food trucks that are actually open, actually nearby, and actually worth leaving the house for.
           </p>
           <div class="button-row">
-            <a class="btn" href="https://apps.apple.com/us/app/trucktap/id6762240100" target="_blank" rel="noopener noreferrer">Download for iPhone</a>
-            <a class="btn light" href="https://play.google.com/store/apps/details?id=app.rork.trucktap_food_truck_finder_cqgko70&amp;hl=en_US" target="_blank" rel="noopener noreferrer">Download for Android</a>
+            <a class="store-badge" href="https://apps.apple.com/us/app/trucktap/id6762240100" target="_blank" rel="noopener noreferrer" aria-label="Download TruckTap on the App Store">
+              <img src="appstore-badge.svg" alt="Download on the App Store" />
+            </a>
+            <a class="store-badge" href="https://play.google.com/store/apps/details?id=app.rork.trucktap_food_truck_finder_cqgko70&amp;hl=en_US" target="_blank" rel="noopener noreferrer" aria-label="Get TruckTap on Google Play">
+              <img src="googleplay-badge.svg" alt="Get it on Google Play" />
+            </a>
           </div>
         </div>
       </div>
