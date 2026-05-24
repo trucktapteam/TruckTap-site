@@ -154,13 +154,25 @@
       color: var(--text);
     }
 
-    .hero {
-      display: grid;
-      grid-template-columns: 1.05fr 1fr;
-      gap: 44px;
-      align-items: center;
-      padding: 8px 0 42px;
-    }
+   .hero {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 44px;
+  align-items: center;
+  padding: 70px 60px;
+  margin-top: 24px;
+
+  background:
+    radial-gradient(circle at top right, rgba(249,115,22,0.18), transparent 30%),
+    linear-gradient(135deg, #111827 0%, #0f172a 100%);
+
+  border-radius: 42px;
+
+  box-shadow:
+    0 30px 80px rgba(15,23,42,0.35);
+
+  overflow: hidden;
+}
 
     .hero-copy {
       max-width: 640px;
@@ -183,20 +195,20 @@
       font-size: clamp(3.2rem, 6vw, 5.5rem);
       line-height: 0.96;
       letter-spacing: -0.05em;
-      color: var(--navy);
+      color: #ffffff;
       margin-bottom: 14px;
     }
 
     .hook {
       font-size: 1.16rem;
       font-weight: 800;
-      color: #9a3412;
+      color: #fdba74;
       margin-bottom: 12px;
     }
 
     .subtext {
       font-size: 1.08rem;
-      color: var(--muted);
+      color: rgba(255,255,255,0.72);
       margin-bottom: 22px;
       max-width: 560px;
     }
@@ -243,7 +255,7 @@
 
     .facebook-note,
     .hero-note {
-      color: #6b7280;
+      color: rgba(255,255,255,0.62);
       font-size: 0.96rem;
       max-width: 560px;
     }
@@ -259,7 +271,7 @@
     }
 
     .hero-note strong {
-      color: var(--text);
+      color: #ffffff;
     }
 
     .hero-visual {
