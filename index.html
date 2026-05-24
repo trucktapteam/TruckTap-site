@@ -6,12 +6,12 @@
   <title>TruckTap | Find Food Trucks That Are Actually Open</title>
   <meta
     name="description"
-    content="TruckTap helps you find food trucks that are actually open right now. See live locations, discover nearby trucks, and never miss a favorite again."
+    content="TruckTap helps you find food trucks that are actually open right now. See real locations, follow favorite trucks, and never miss an update."
   />
   <meta property="og:title" content="TruckTap | Find Food Trucks That Are Actually Open" />
   <meta
     property="og:description"
-    content="See what’s open near you right now. Real trucks. Real locations. No more guessing."
+    content="Real food trucks. Real locations. Less guessing, more eating."
   />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://gettrucktap.com" />
@@ -19,18 +19,20 @@
 
   <style>
     :root {
-      --bg: #fffaf5;
-      --surface: #ffffff;
-      --surface-soft: #fff7f1;
-      --text: #111827;
-      --muted: #5f6b7a;
-      --navy: #0f172a;
+      --cream: #fff8ef;
+      --cream-2: #ffedd5;
+      --white: #ffffff;
+      --ink: #101827;
+      --navy: #111827;
+      --muted: #657181;
       --orange: #f97316;
-      --orange-dark: #ea580c;
-      --orange-soft: #ffedd5;
-      --border: #eee4d8;
-      --shadow: 0 18px 45px rgba(17, 24, 39, 0.08);
-      --max: 1380px;
+      --orange-dark: #c2410c;
+      --gold: #facc15;
+      --green: #16a34a;
+      --border: rgba(17, 24, 39, 0.12);
+      --shadow: 0 24px 60px rgba(17, 24, 39, 0.14);
+      --shadow-soft: 0 14px 34px rgba(17, 24, 39, 0.1);
+      --max: 1180px;
     }
 
     * {
@@ -39,58 +41,25 @@
       padding: 0;
     }
 
-    /* App Store Buttons */
-.store-buttons {
-  display: flex;
-  gap: 18px;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  margin-bottom: 20px;
-}
-
-.store-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px 28px;
-  border-radius: 18px;
-  font-weight: 900;
-  font-size: 20px;
-  text-decoration: none;
-  transition: all 0.2s ease;
-  min-width: 280px;
-}
-
-/* Apple */
-.store-button.apple {
-  background: #000;
-  color: #fff;
-}
-
-/* Google */
-.store-button.google {
-  background: #ff6a00;
-  color: #111;
-}
-
-.store-button:hover {
-  transform: translateY(-3px);
-  opacity: 0.9;
-}
     html {
       scroll-behavior: smooth;
     }
 
     body {
-  font-family: Arial, Helvetica, sans-serif;
-  color: var(--text);
-  background: #fffaf5;
-  line-height: 1.5;
-}
+      min-width: 320px;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--ink);
+      background:
+        linear-gradient(90deg, rgba(17, 24, 39, 0.035) 1px, transparent 1px),
+        linear-gradient(rgba(17, 24, 39, 0.035) 1px, transparent 1px),
+        var(--cream);
+      background-size: 46px 46px;
+      line-height: 1.5;
+    }
 
     img {
-      max-width: 100%;
       display: block;
+      max-width: 100%;
     }
 
     a {
@@ -99,622 +68,922 @@
     }
 
     .container {
-      width: 100%;
-      max-width: var(--max);
+      width: min(100% - 36px, var(--max));
       margin: 0 auto;
-      padding: 0 28px;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255, 248, 239, 0.86);
+      border-bottom: 1px solid rgba(17, 24, 39, 0.08);
+      backdrop-filter: blur(18px);
     }
 
     .nav {
       display: flex;
+      align-items: center;
       justify-content: space-between;
-      align-items: flex-start;
       gap: 24px;
-      padding: 10px 0 8px;
+      min-height: 86px;
     }
 
-   .brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 16px;
-}
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 13px;
+      min-width: 190px;
+    }
 
-.brand img {
-  width: 110px;
-  height: auto;
-  display: block;
-  filter: drop-shadow(0 12px 22px rgba(0,0,0,.18));
-}
+    .brand-mark {
+      width: 58px;
+      height: 58px;
+      object-fit: contain;
+      filter: drop-shadow(0 8px 14px rgba(17, 24, 39, 0.18));
+    }
 
-.brand span {
-  font-size: 52px;
-  font-weight: 900;
-  letter-spacing: -0.04em;
-  color: #0f172a;
-  line-height: 1;
-}
+    .brand-name {
+      font-size: clamp(1.55rem, 2.4vw, 2.35rem);
+      font-weight: 950;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
 
-.brand-accent {
-  color: #f97316;
-}
+    .brand-name span {
+      color: var(--orange);
+    }
 
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 24px;
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--muted);
-      padding-top: 34px;
-      flex-wrap: wrap;
       justify-content: flex-end;
+      gap: 18px;
+      color: #4b5563;
+      font-size: 0.94rem;
+      font-weight: 800;
+    }
+
+    .nav-links a {
+      white-space: nowrap;
     }
 
     .nav-links a:hover {
-      color: var(--text);
+      color: var(--orange-dark);
     }
 
-   .hero {
-  display: grid;
-  grid-template-columns: 1.05fr 1fr;
-  gap: 44px;
-  align-items: center;
-  padding: 100px 80px;
-  margin-top: 24px;
+    .section {
+      padding: 74px 0;
+    }
 
-  background:
-    radial-gradient(circle at top right, rgba(249,115,22,0.18), transparent 30%),
-    linear-gradient(135deg, #111827 0%, #0f172a 100%);
+    .hero-wrap {
+      padding: 30px 0 64px;
+    }
 
-  border-radius: 42px;
-
-  box-shadow:
-    0 30px 80px rgba(15,23,42,0.35);
-
-  overflow: hidden;
-}
-
-    .hero-copy {
-      max-width: 640px;
+    .hero {
       position: relative;
-      z-index: 2;
+      display: grid;
+      grid-template-columns: minmax(0, 1.03fr) minmax(360px, 0.97fr);
+      gap: 42px;
+      align-items: center;
+      overflow: hidden;
+      min-height: 690px;
+      padding: clamp(34px, 6vw, 74px);
+      color: var(--white);
+      background:
+        radial-gradient(circle at 88% 10%, rgba(249, 115, 22, 0.45), transparent 28%),
+        radial-gradient(circle at 6% 92%, rgba(250, 204, 21, 0.24), transparent 26%),
+        linear-gradient(135deg, #090d16 0%, #111827 55%, #1f2937 100%);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 36px;
+      box-shadow: 0 34px 90px rgba(17, 24, 39, 0.34);
     }
 
-    .eyebrow {
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      transform: rotate(-10deg);
+      pointer-events: none;
+    }
+
+    .hero::before {
+      right: -96px;
+      top: 92px;
+      width: 280px;
+      height: 280px;
+      border-radius: 34px;
+    }
+
+    .hero::after {
+      left: -70px;
+      bottom: -82px;
+      width: 190px;
+      height: 190px;
+      border-radius: 999px;
+    }
+
+    .hero-copy,
+    .hero-media {
+      position: relative;
+      z-index: 1;
+    }
+
+    .pill {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: var(--orange-soft);
-      color: #c2410c;
-      font-weight: 800;
-      font-size: 0.92rem;
-      padding: 10px 15px;
+      width: fit-content;
+      margin-bottom: 18px;
+      padding: 10px 14px;
+      color: #431407;
+      background: var(--cream-2);
+      border: 1px solid rgba(249, 115, 22, 0.28);
       border-radius: 999px;
-      margin-bottom: 16px;
+      font-size: 0.88rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      background: var(--green);
+      border-radius: 999px;
+      box-shadow: 0 0 0 5px rgba(22, 163, 74, 0.18);
     }
 
     h1 {
-      font-size: clamp(3.2rem, 6vw, 5.5rem);
-      line-height: 0.96;
-      letter-spacing: -0.05em;
-      color: #ffffff;
-      margin-bottom: 14px;
+      max-width: 820px;
+      margin-bottom: 18px;
+      font-size: clamp(3rem, 7.6vw, 6.8rem);
+      font-weight: 950;
+      letter-spacing: -0.06em;
+      line-height: 0.9;
     }
 
-    .hook {
-      font-size: 1.16rem;
-      font-weight: 800;
-      color: #fdba74;
-      margin-bottom: 12px;
+    .hero-text {
+      max-width: 640px;
+      margin-bottom: 24px;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: clamp(1.08rem, 1.9vw, 1.3rem);
     }
 
-    .subtext {
-      font-size: 1.08rem;
-      color: rgba(255,255,255,0.72);
-      margin-bottom: 22px;
-      max-width: 560px;
-    }
-
-    .cta-row {
+    .download-row,
+    .button-row {
       display: flex;
       flex-wrap: wrap;
       gap: 14px;
-      margin-bottom: 14px;
     }
 
+    .download-row {
+      margin-bottom: 24px;
+    }
+
+    .store-button,
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-weight: 800;
-      padding: 14px 22px;
-      border-radius: 14px;
-      border: 1px solid transparent;
-      transition: 0.2s ease;
+      min-height: 54px;
+      border-radius: 17px;
+      border: 2px solid transparent;
+      font-weight: 950;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
     }
 
-    .btn-primary {
+    .store-button {
+      min-width: 220px;
+      padding: 13px 18px;
+      color: var(--white);
+      background: #050505;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+    }
+
+    .store-button.google {
+      color: #171717;
       background: var(--orange);
-      color: #fff;
-      box-shadow: 0 14px 30px rgba(249, 115, 22, 0.24);
     }
 
-    .btn-primary:hover {
+    .store-button:hover,
+    .btn:hover {
+      transform: translateY(-3px) rotate(-0.5deg);
+    }
+
+    .btn {
+      padding: 14px 22px;
+      color: var(--white);
+      background: var(--orange);
+      box-shadow: 0 15px 30px rgba(249, 115, 22, 0.28);
+    }
+
+    .btn:hover {
       background: var(--orange-dark);
-      transform: translateY(-1px);
     }
 
-    .btn-secondary {
-      background: #fff;
-      color: var(--navy);
-      border-color: #d5dce5;
+    .btn.light {
+      color: var(--ink);
+      background: var(--white);
+      border-color: rgba(255, 255, 255, 0.2);
+      box-shadow: none;
     }
 
-    .btn-secondary:hover {
-      background: #f8fafc;
-      border-color: #bbc4cf;
-    }
-
-    .facebook-note,
-    .hero-note {
-      color: rgba(255,255,255,0.62);
+    .hero-proof {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+      color: rgba(255, 255, 255, 0.72);
       font-size: 0.96rem;
-      max-width: 560px;
+      font-weight: 800;
     }
 
-    .facebook-note {
-      margin-bottom: 8px;
+    .hero-proof span {
+      padding: 8px 11px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 999px;
     }
 
-    .facebook-note a,
-    .footer a {
-      color: var(--orange-dark);
-      font-weight: 700;
+    .hero-media {
+      min-height: 560px;
     }
 
-    .hero-note strong {
-      color: #ffffff;
-    }
-
-    .hero-visual {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 32px;
-  padding: 24px;
-  backdrop-filter: blur(10px);
-
-  box-shadow:
-    0 25px 60px rgba(0,0,0,0.35);
-
-  position: relative;
-}
-
-    .phone-stack {
-      display: grid;
-      grid-template-columns: 1fr 0.92fr;
-      gap: 14px;
-      align-items: start;
-    }
-
-    .phone {
-      background: var(--navy);
-      border-radius: 30px;
-      padding: 14px;
-      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.22);
+    .phone-collage {
       position: relative;
-      transform: rotate(-2deg);
-      transition: transform 0.25s ease;
+      height: 560px;
     }
 
-    .phone:hover {
-  transform: rotate(0deg) scale(1.02);
-}
+    .phone-card,
+    .floating-shot {
+      position: absolute;
+      overflow: hidden;
+      background: var(--white);
+      border: 9px solid #050505;
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.45);
+    }
 
-    .phone::before {
+    .phone-card {
+      left: 11%;
+      top: 0;
+      width: min(72%, 330px);
+      border-radius: 34px;
+      transform: rotate(-5deg);
+    }
+
+    .phone-card::before {
       content: "";
       position: absolute;
       top: 9px;
       left: 50%;
-      transform: translateX(-50%);
-      width: 92px;
+      z-index: 2;
+      width: 86px;
       height: 10px;
-      background: #1f2937;
+      background: #050505;
       border-radius: 999px;
+      transform: translateX(-50%);
     }
 
-    .phone-screen,
-    .mini-card {
-      overflow: hidden;
-      background: #fff;
-    }
-
-    .phone-screen {
-      border-radius: 22px;
-    }
-
-    .phone-screen img {
+    .phone-card img,
+    .floating-shot img {
       width: 100%;
-      height: auto;
-      display: block;
+      height: 100%;
+      object-fit: cover;
     }
 
-    .mini-stack {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      padding-top: 18px;
+    .floating-shot {
+      border-width: 6px;
+      border-radius: 24px;
     }
 
-    .mini-card {
-      border: 1px solid var(--border);
+    .shot-a {
+      right: 1%;
+      top: 72px;
+      width: 44%;
+      transform: rotate(7deg);
+    }
+
+    .shot-b {
+      right: 10%;
+      bottom: 20px;
+      width: 48%;
+      transform: rotate(-3deg);
+    }
+
+    .chaos-tag {
+      position: absolute;
+      left: 0;
+      bottom: 84px;
+      max-width: 230px;
+      padding: 18px;
+      color: var(--ink);
+      background: var(--gold);
+      border: 3px solid #050505;
       border-radius: 22px;
-      padding: 8px;
-      box-shadow: 0 10px 22px rgba(17, 24, 39, 0.08);
+      box-shadow: 9px 9px 0 #050505;
+      font-size: 1rem;
+      font-weight: 950;
+      line-height: 1.15;
+      transform: rotate(4deg);
     }
 
-    .mini-card img {
-      width: 100%;
-      height: auto;
-      border-radius: 16px;
-    }
-
-    .section {
-      padding: 50px 0;
-    }
-
-    .section-header {
-      max-width: 760px;
-      margin: 0 auto 28px;
+    .section-head {
+      max-width: 790px;
+      margin: 0 auto 30px;
       text-align: center;
     }
 
-    .section-header h2 {
-      font-size: clamp(2rem, 4vw, 3rem);
-      line-height: 1.05;
-      letter-spacing: -0.04em;
-      color: var(--navy);
+    .section-kicker {
+      display: inline-flex;
       margin-bottom: 12px;
+      color: var(--orange-dark);
+      font-size: 0.82rem;
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
     }
 
-    .section-header p {
-      color: var(--muted);
-      font-size: 1.03rem;
-    }
-
-    .problem-strip {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 28px;
-      padding: 20px;
-      box-shadow: var(--shadow);
-    }
-
-    .problem-box {
-      background: var(--surface-soft);
-      border: 1px solid #f6e8d9;
-      border-radius: 22px;
-      padding: 20px;
-    }
-
-    .problem-box h3 {
-      font-size: 1.15rem;
+    h2 {
       color: var(--navy);
-      margin-bottom: 10px;
+      font-size: clamp(2.1rem, 4.8vw, 4.4rem);
+      font-weight: 950;
+      letter-spacing: -0.055em;
+      line-height: 0.95;
     }
 
-    .problem-box p {
+    .section-head p {
+      max-width: 680px;
+      margin: 14px auto 0;
       color: var(--muted);
+      font-size: 1.08rem;
     }
 
-    .feature-grid {
+    .comparison {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
     }
 
-    .feature-card {
-      background: #fff;
+    .compare-card,
+    .step-card,
+    .owner-panel,
+    .personality-card,
+    .cta-panel {
       border: 1px solid var(--border);
-      border-radius: 22px;
-      padding: 22px;
-      box-shadow: 0 12px 26px rgba(17, 24, 39, 0.05);
+      border-radius: 30px;
+      box-shadow: var(--shadow-soft);
     }
 
-    .feature-icon {
-      font-size: 1.35rem;
+    .compare-card {
+      min-height: 290px;
+      padding: clamp(24px, 4vw, 38px);
+      background: var(--white);
+    }
+
+    .compare-card.dark {
+      color: var(--white);
+      background: var(--navy);
+      transform: rotate(-0.8deg);
+    }
+
+    .compare-card.orange {
+      background: var(--orange);
+      transform: rotate(0.8deg);
+    }
+
+    .compare-label {
+      display: inline-flex;
+      margin-bottom: 20px;
+      padding: 8px 12px;
+      background: rgba(255, 255, 255, 0.18);
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .compare-card.orange .compare-label {
+      color: #431407;
+      background: rgba(255, 255, 255, 0.52);
+    }
+
+    .compare-card h3,
+    .step-card h3,
+    .owner-copy h3,
+    .personality-card h3 {
       margin-bottom: 12px;
+      font-size: clamp(1.45rem, 2.7vw, 2.15rem);
+      font-weight: 950;
+      letter-spacing: -0.035em;
+      line-height: 1.02;
     }
 
-    .feature-card h3 {
-      font-size: 1.15rem;
-      margin-bottom: 10px;
-      color: var(--navy);
-    }
-
-    .feature-card p {
+    .compare-card p,
+    .step-card p,
+    .owner-copy p,
+    .personality-card p {
       color: var(--muted);
-      font-size: 0.98rem;
+      font-size: 1.02rem;
+    }
+
+    .compare-card.dark p {
+      color: rgba(255, 255, 255, 0.72);
+    }
+
+    .compare-card.orange p {
+      color: #431407;
+      font-weight: 800;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .step-card {
+      position: relative;
+      min-height: 260px;
+      padding: 26px;
+      background: var(--white);
+      overflow: hidden;
+    }
+
+    .step-card:nth-child(2) {
+      margin-top: 26px;
+    }
+
+    .step-card:nth-child(3) {
+      margin-top: 52px;
+    }
+
+    .step-number {
+      display: grid;
+      place-items: center;
+      width: 58px;
+      height: 58px;
+      margin-bottom: 24px;
+      color: var(--white);
+      background: var(--orange);
+      border: 3px solid var(--ink);
+      border-radius: 18px;
+      box-shadow: 6px 6px 0 var(--ink);
+      font-size: 1.4rem;
+      font-weight: 950;
+      transform: rotate(-5deg);
     }
 
     .screenshot-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
       align-items: start;
     }
 
-    .shot {
-      background: #fff;
+    .screen-card {
+      padding: 9px;
+      background: var(--white);
       border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 8px;
-      box-shadow: 0 10px 22px rgba(17, 24, 39, 0.08);
-      overflow: hidden;
-    }
-
-    .shot img {
-      width: 100%;
-      height: auto;
-      border-radius: 16px;
-      display: block;
-    }
-
-    .split {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-
-    .audience-card {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      padding: 24px;
-      box-shadow: 0 12px 26px rgba(17, 24, 39, 0.05);
-    }
-
-    .audience-card h3 {
-      font-size: 1.35rem;
-      color: var(--navy);
-      margin-bottom: 14px;
-    }
-
-    .audience-card ul {
-      list-style: none;
-      display: grid;
-      gap: 10px;
-      color: var(--muted);
-    }
-
-    .audience-card li {
-      position: relative;
-      padding-left: 24px;
-    }
-
-    .audience-card li::before {
-      content: "•";
-      color: var(--orange);
-      font-weight: 900;
-      position: absolute;
-      left: 6px;
-      top: 0;
-    }
-
-    .cta-panel {
-      background: linear-gradient(135deg, #fff2e4 0%, #ffffff 100%);
-      border: 1px solid var(--border);
-      border-radius: 30px;
-      padding: 28px 24px;
-      text-align: center;
+      border-radius: 27px;
       box-shadow: var(--shadow);
     }
 
+    .screen-card:nth-child(even) {
+      margin-top: 34px;
+    }
+
+    .screen-card img {
+      width: 100%;
+      border-radius: 20px;
+    }
+
+    .community {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 34px;
+      align-items: center;
+    }
+
+    .truck-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .truck-photo {
+      overflow: hidden;
+      border: 8px solid var(--white);
+      border-radius: 28px;
+      box-shadow: var(--shadow-soft);
+      background: var(--white);
+    }
+
+    .truck-photo:first-child {
+      grid-row: span 2;
+      transform: rotate(-2deg);
+    }
+
+    .truck-photo:nth-child(2) {
+      transform: rotate(2deg);
+    }
+
+    .truck-photo:nth-child(3) {
+      transform: rotate(-1deg);
+    }
+
+    .truck-photo img {
+      width: 100%;
+      height: 100%;
+      min-height: 210px;
+      object-fit: cover;
+    }
+
+    .community-copy {
+      padding: clamp(24px, 4vw, 42px);
+      color: var(--white);
+      background: var(--navy);
+      border-radius: 34px;
+      box-shadow: var(--shadow);
+    }
+
+    .community-copy h2 {
+      color: var(--white);
+    }
+
+    .community-copy p {
+      margin-top: 16px;
+      color: rgba(255, 255, 255, 0.76);
+      font-size: 1.08rem;
+    }
+
+    .mini-points {
+      display: grid;
+      gap: 10px;
+      margin-top: 24px;
+      list-style: none;
+    }
+
+    .mini-points li {
+      padding: 12px 14px;
+      color: var(--ink);
+      background: var(--cream);
+      border-radius: 15px;
+      font-weight: 900;
+    }
+
+    .owner-panel {
+      display: grid;
+      grid-template-columns: 0.86fr 1.14fr;
+      gap: 26px;
+      align-items: center;
+      padding: clamp(24px, 5vw, 48px);
+      background:
+        linear-gradient(135deg, rgba(249, 115, 22, 0.16), rgba(255, 255, 255, 0.92)),
+        var(--white);
+    }
+
+    .owner-logo {
+      display: grid;
+      place-items: center;
+      min-height: 310px;
+      background: #050505;
+      border-radius: 28px;
+      transform: rotate(-1.5deg);
+    }
+
+    .owner-logo img {
+      width: min(76%, 360px);
+      filter: drop-shadow(0 18px 30px rgba(0, 0, 0, 0.34));
+    }
+
+    .owner-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 22px;
+      list-style: none;
+    }
+
+    .owner-list li {
+      padding: 14px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      color: #374151;
+      font-weight: 850;
+    }
+
+    .personality-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .personality-card {
+      min-height: 260px;
+      padding: 26px;
+      background: var(--white);
+    }
+
+    .personality-card:nth-child(1) {
+      background: var(--gold);
+      transform: rotate(-1deg);
+    }
+
+    .personality-card:nth-child(2) {
+      color: var(--white);
+      background: var(--navy);
+      transform: rotate(1deg);
+    }
+
+    .personality-card:nth-child(2) p {
+      color: rgba(255, 255, 255, 0.72);
+    }
+
+    .personality-card:nth-child(3) {
+      background: var(--orange);
+      transform: rotate(-0.5deg);
+    }
+
+    .personality-card:nth-child(3) p,
+    .personality-card:nth-child(1) p {
+      color: #431407;
+      font-weight: 800;
+    }
+
+    .cta-panel {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(34px, 7vw, 74px);
+      color: var(--white);
+      text-align: center;
+      background:
+        linear-gradient(rgba(17, 24, 39, 0.48), rgba(17, 24, 39, 0.84)),
+        url("truck2.jpg") center / cover;
+      border-radius: 36px;
+      box-shadow: 0 34px 90px rgba(17, 24, 39, 0.28);
+    }
+
     .cta-panel h2 {
-      font-size: clamp(2rem, 4vw, 3rem);
-      line-height: 1.05;
-      letter-spacing: -0.04em;
-      color: var(--navy);
-      margin-bottom: 12px;
+      max-width: 820px;
+      margin: 0 auto;
+      color: var(--white);
     }
 
     .cta-panel p {
-      max-width: 720px;
-      margin: 0 auto 18px;
-      color: var(--muted);
-      font-size: 1.04rem;
+      max-width: 650px;
+      margin: 16px auto 24px;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 1.12rem;
+    }
+
+    .cta-panel .button-row {
+      justify-content: center;
     }
 
     .footer {
-      padding: 22px 0 34px;
-      text-align: center;
-      color: #6b7280;
-      font-size: 0.95rem;
+      padding: 34px 0 44px;
+      color: #5b6470;
+      font-weight: 750;
     }
 
-    @media (max-width: 1200px) {
-      .hero {
-        grid-template-columns: 1fr;
-        gap: 28px;
-      }
-
-      .hero-copy {
-        max-width: 100%;
-      }
-
-      .nav-links {
-        padding-top: 24px;
-      }
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(17, 24, 39, 0.12);
     }
 
-    @media (max-width: 1100px) {
-      .screenshot-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
     }
 
-    @media (max-width: 960px) {
-      .problem-strip,
-      .feature-grid,
-      .split,
-      .phone-stack {
-        grid-template-columns: 1fr;
-      }
+    .footer a {
+      color: var(--orange-dark);
+      font-weight: 950;
+    }
 
+    @media (max-width: 1040px) {
       .nav {
-        align-items: center;
+        min-height: 76px;
       }
 
       .nav-links {
         display: none;
       }
 
-      .brand img {
-        height: 96px;
+      .hero,
+      .community,
+      .owner-panel {
+        grid-template-columns: 1fr;
       }
 
-      .section {
-        padding: 42px 0;
+      .hero-media {
+        min-height: 500px;
       }
 
-      .mini-stack {
-        padding-top: 0;
+      .phone-collage {
+        max-width: 620px;
+        height: 500px;
+        margin: 0 auto;
+      }
+
+      .screenshot-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
 
-    @media (max-width: 640px) {
-      .container {
-        padding: 0 18px;
+    @media (max-width: 820px) {
+      .section {
+        padding: 56px 0;
       }
 
-      h1 {
-        font-size: 2.45rem;
+      .hero-wrap {
+        padding-top: 20px;
       }
 
-      .hook,
-      .subtext {
-        font-size: 1.02rem;
+      .hero {
+        min-height: auto;
+        border-radius: 28px;
       }
 
-      .cta-row {
+      .download-row,
+      .button-row {
         flex-direction: column;
       }
 
+      .store-button,
       .btn {
         width: 100%;
+      }
+
+      .comparison,
+      .steps,
+      .personality-grid,
+      .owner-list {
+        grid-template-columns: 1fr;
+      }
+
+      .step-card:nth-child(2),
+      .step-card:nth-child(3),
+      .screen-card:nth-child(even) {
+        margin-top: 0;
+      }
+
+      .compare-card.dark,
+      .compare-card.orange,
+      .step-card,
+      .personality-card {
+        transform: none;
+      }
+
+      .truck-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .truck-photo:first-child {
+        grid-row: auto;
+      }
+    }
+
+    @media (max-width: 580px) {
+      .container {
+        width: min(100% - 28px, var(--max));
+      }
+
+      .brand-mark {
+        width: 48px;
+        height: 48px;
+      }
+
+      .brand-name {
+        font-size: 1.65rem;
+      }
+
+      .hero {
+        padding: 28px 18px;
+      }
+
+      h1 {
+        font-size: clamp(2.75rem, 16vw, 4.15rem);
+      }
+
+      .hero-media {
+        min-height: 410px;
+      }
+
+      .phone-collage {
+        height: 410px;
+      }
+
+      .phone-card {
+        left: 4%;
+        width: 62%;
+      }
+
+      .shot-a {
+        right: 0;
+        width: 45%;
+      }
+
+      .shot-b {
+        right: 2%;
+        width: 52%;
+      }
+
+      .chaos-tag {
+        left: 5px;
+        bottom: 42px;
+        max-width: 190px;
+        padding: 14px;
+        font-size: 0.9rem;
       }
 
       .screenshot-grid {
         grid-template-columns: 1fr;
       }
 
-     .brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  text-decoration: none;
-}
+      .screen-card {
+        max-width: 360px;
+        margin: 0 auto;
+      }
 
-.brand img {
-  width: 64px;
-  height: auto;
-  display: block;
-  filter: drop-shadow(0 8px 16px rgba(0,0,0,.12));
-}
-
-.brand span {
-  font-size: 2rem;
-  font-weight: 800;
-  line-height: 1;
-  color: #111827;
-}
-
-.brand-accent {
-  color: #f97316;
-} 
-
-      @media (max-width: 768px) {
-  .brand img {
-    width: 48px;
-  }
-
-  .brand span {
-    font-size: 1.6rem;
-  }
-}
-
+      .footer-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
     }
   </style>
 </head>
+
 <body>
-  <div class="container">
-    <nav class="nav">
-  <a href="#" class="brand">
-    <img src="TruckTapNoText-Picsart-BackgroundRemover.png" alt="TruckTap logo" />
-    <span>Truck<span class="brand-accent">Tap</span></span>
-  </a>
+  <header class="site-header">
+    <div class="container">
+      <nav class="nav" aria-label="Primary navigation">
+        <a class="brand" href="#" aria-label="TruckTap home">
+          <img class="brand-mark" src="TruckTapNoText-Picsart-BackgroundRemover.png" alt="TruckTap logo" />
+          <span class="brand-name">Truck<span>Tap</span></span>
+        </a>
 
-  <div class="nav-links">
-    <a href="#why">Why TruckTap</a>
-    <a href="#how">How It Works</a>
-    <a href="#screens">Screenshots</a>
-    <a href="#owners">For Owners</a>
-    <a href="https://www.facebook.com/profile.php?id=61574337256977" target="_blank" rel="noopener noreferrer">Facebook</a>
-  </div>
-</nav>
-    <section class="hero">
-      <div class="hero-copy">
-        <div class="store-buttons">
-  <a class="store-button apple" href="https://apps.apple.com/us/app/trucktap/id6762240100" target="_blank">
-    🍎 Download on the App Store
-  </a>
-  <a class="store-button google" href="https://play.google.com/store/apps/details?id=app.rork.trucktap_food_truck_finder_cqgko70&hl=en_US" target="_blank">
-    ▶ Get it on Google Play
-  </a>
-</div>
-        <div class="eyebrow">📍 Built for real-world food truck discovery</div>
+        <div class="nav-links">
+          <a href="#why">Why</a>
+          <a href="#how">How it works</a>
+          <a href="#screens">Screens</a>
+          <a href="#community">Community</a>
+          <a href="#owners">Owners</a>
+          <a href="#download">Download</a>
+        </div>
+      </nav>
+    </div>
+  </header>
 
-        <h1>Find food trucks that are actually open.</h1>
+  <main>
+    <section class="hero-wrap" id="download">
+      <div class="container">
+        <div class="hero">
+          <div class="hero-copy">
+            <div class="download-row" aria-label="App download links">
+              <a class="store-button" href="https://apps.apple.com/us/app/trucktap/id6762240100" target="_blank" rel="noopener noreferrer">Download on the App Store</a>
+              <a class="store-button google" href="https://play.google.com/store/apps/details?id=app.rork.trucktap_food_truck_finder_cqgko70&amp;hl=en_US" target="_blank" rel="noopener noreferrer">Get it on Google Play</a>
+            </div>
 
-        <p class="hook">Know who’s actually open. Not who posted hours.</p>
+            <div class="pill"><span class="status-dot"></span> Built for live food truck chaos</div>
+            <h1>Find food trucks that are actually open.</h1>
+            <p class="hero-text">
+              TruckTap helps you see real food truck locations, discover what is serving nearby, follow your favorites, and stop chasing stale posts across the internet.
+            </p>
 
-        <p class="subtext">
-          See what’s open near you right now, discover real truck locations,
-          and never miss a favorite again.
-        </p>
+            <div class="button-row">
+              <a class="btn" href="#screens">See the app</a>
+              <a class="btn light" href="#owners">For truck owners</a>
+            </div>
 
-       <div class="cta-row">
-  <a href="https://www.facebook.com/trucktap" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Follow Launch Updates</a>
-  <a href="#how" class="btn btn-secondary">See How It Works</a>
-</div>
-        
-       <p class="facebook-note">
-  TruckTap is now available on iPhone and Android.
-</p>
-
-        <p class="hero-note">
-          <strong>TruckTap is built around how food trucks actually work</strong>
-          — moving locations, changing hours, and real-time discovery.
-        </p>
-      </div>
-
-      <div class="hero-visual">
-        <div class="phone-stack">
-          <div class="phone">
-            <div class="phone-screen">
-              <img src="map.jpg" alt="TruckTap map screen showing nearby food trucks" />
+            <div class="hero-proof" aria-label="TruckTap highlights">
+              <span>Real locations</span>
+              <span>Open-now discovery</span>
+              <span>Favorite updates</span>
             </div>
           </div>
 
-          <div class="mini-stack">
-            <div class="mini-card">
-              <img src="discover.jpg" alt="TruckTap discover screen" />
-            </div>
-
-            <div class="mini-card">
-              <img src="profile.jpg" alt="TruckTap profile screen" />
+          <div class="hero-media" aria-label="TruckTap app screenshot collage">
+            <div class="phone-collage">
+              <div class="phone-card">
+                <img src="map.jpg" alt="TruckTap map showing nearby food trucks" />
+              </div>
+              <div class="floating-shot shot-a">
+                <img src="discover.jpg" alt="TruckTap discover screen" />
+              </div>
+              <div class="floating-shot shot-b">
+                <img src="profile.jpg" alt="TruckTap truck profile screen" />
+              </div>
+              <div class="chaos-tag">Tonight's dinner plan should not require detective work.</div>
             </div>
           </div>
         </div>
@@ -722,140 +991,217 @@
     </section>
 
     <section class="section" id="why">
-      <div class="section-header">
-        <h2>Food trucks move. Most apps don’t keep up.</h2>
-        <p>
-          Social posts get missed. Hours change. Old directory sites go stale.
-          TruckTap is built to make food truck discovery feel live, local, and useful again.
-        </p>
-      </div>
-
-      <div class="problem-strip">
-        <div class="problem-box">
-          <h3>The old way</h3>
+      <div class="container">
+        <div class="section-head">
+          <span class="section-kicker">The problem</span>
+          <h2>Food trucks move. Most apps do not keep up.</h2>
           <p>
-            Search old posts, guess from outdated hours, and hope the truck is still there.
+            A truck can change lots, sell out early, skip a stop, or pop up somewhere better. TruckTap is built around the messy, delicious reality of mobile food.
           </p>
         </div>
 
-        <div class="problem-box">
-          <h3>The TruckTap way</h3>
-          <p>
-            Open the app, see what’s actually open, check the latest location, and go eat.
-          </p>
+        <div class="comparison">
+          <article class="compare-card dark">
+            <span class="compare-label">The stale way</span>
+            <h3>Scroll old posts, trust old hours, hope the truck is still there.</h3>
+            <p>
+              Directory listings and social feeds are useful until they are not. One missed update can turn lunch into a parking lot tour.
+            </p>
+          </article>
+
+          <article class="compare-card orange">
+            <span class="compare-label">The TruckTap way</span>
+            <h3>Open the app, check who is open, tap the real location, go eat.</h3>
+            <p>
+              Clear signals, fresh locations, favorite trucks, and community-powered sightings all in one place.
+            </p>
+          </article>
         </div>
       </div>
     </section>
 
     <section class="section" id="how">
-      <div class="section-header">
-        <h2>How TruckTap works</h2>
-        <p>
-          Built for hungry customers, real truck owners, and the way food trucks actually operate.
-        </p>
-      </div>
-
-      <div class="feature-grid">
-        <div class="feature-card">
-          <div class="feature-icon">🟢</div>
-          <h3>See what’s open now</h3>
+      <div class="container">
+        <div class="section-head">
+          <span class="section-kicker">How it works</span>
+          <h2>Three taps from hungry to handled.</h2>
           <p>
-            Find food trucks that are actually serving right now instead of guessing from old schedules and posts.
+            TruckTap keeps the experience simple because the hard part should be choosing tacos, barbecue, coffee, or dessert.
           </p>
         </div>
 
-        <div class="feature-card">
-          <div class="feature-icon">📍</div>
-          <h3>See live locations</h3>
-          <p>
-            Check where trucks are, where they were last updated, and what’s nearby before you waste a trip.
-          </p>
-        </div>
+        <div class="steps">
+          <article class="step-card">
+            <div class="step-number">1</div>
+            <h3>See what is open now.</h3>
+            <p>
+              Start with trucks that are actually serving instead of guessing from schedules that may already be wrong.
+            </p>
+          </article>
 
-        <div class="feature-card">
-          <div class="feature-icon">👀</div>
-          <h3>Spot a truck</h3>
-          <p>
-            Saw a truck out in the wild? Add it to the map with a photo and location to help everyone else find it too.
-          </p>
+          <article class="step-card">
+            <div class="step-number">2</div>
+            <h3>Check the real location.</h3>
+            <p>
+              Use the map and truck profiles to see where a truck is, what is nearby, and whether the update looks fresh.
+            </p>
+          </article>
+
+          <article class="step-card">
+            <div class="step-number">3</div>
+            <h3>Favorite the good stuff.</h3>
+            <p>
+              Follow trucks you love so you do not miss the next pop-up, special, neighborhood stop, or late-night rescue.
+            </p>
+          </article>
         </div>
       </div>
     </section>
 
     <section class="section" id="screens">
-      <div class="section-header">
-        <h2>See TruckTap in action</h2>
-        <p>
-          Real screens from the app. Real trucks. Real-time discovery.
-        </p>
-      </div>
+      <div class="container">
+        <div class="section-head">
+          <span class="section-kicker">App screens</span>
+          <h2>Real discovery, not a dusty list.</h2>
+          <p>
+            Map view, discovery, profiles, and sightings work together so customers can find trucks and owners can be found.
+          </p>
+        </div>
 
-      <div class="screenshot-grid">
-        <div class="shot">
-          <img src="map.jpg" alt="TruckTap map screen" />
+        <div class="screenshot-grid">
+          <figure class="screen-card">
+            <img src="map.jpg" alt="TruckTap map screen" />
+          </figure>
+          <figure class="screen-card">
+            <img src="discover.jpg" alt="TruckTap discover screen" />
+          </figure>
+          <figure class="screen-card">
+            <img src="profile.jpg" alt="TruckTap profile screen" />
+          </figure>
+          <figure class="screen-card">
+            <img src="sighting.jpg" alt="TruckTap sighting screen" />
+          </figure>
         </div>
-        <div class="shot">
-          <img src="discover.jpg" alt="TruckTap discover screen" />
-        </div>
-        <div class="shot">
-          <img src="profile.jpg" alt="TruckTap profile screen" />
-        </div>
-        <div class="shot">
-          <img src="sighting.jpg" alt="TruckTap sighting screen" />
+      </div>
+    </section>
+
+    <section class="section" id="community">
+      <div class="container">
+        <div class="community">
+          <div class="truck-grid" aria-label="Food truck photos">
+            <div class="truck-photo">
+              <img src="truck1.jpg" alt="Food truck parked outside" />
+            </div>
+            <div class="truck-photo">
+              <img src="truck2.jpg" alt="Food truck serving customers" />
+            </div>
+            <div class="truck-photo">
+              <img src="truck3.jpg" alt="Food truck on the street" />
+            </div>
+          </div>
+
+          <div class="community-copy">
+            <span class="section-kicker">Real-world energy</span>
+            <h2>Built for the parking lot, the brewery, the festival, and the sudden craving.</h2>
+            <p>
+              TruckTap is community-focused, not corporate. It is for people who spot a truck and want to share it, owners who need visibility today, and locals who know the best meals are sometimes on wheels.
+            </p>
+            <ul class="mini-points">
+              <li>Share sightings when you find something good.</li>
+              <li>Help neighbors skip stale information.</li>
+              <li>Keep favorite trucks easier to find next time.</li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
 
     <section class="section" id="owners">
-      <div class="section-header">
-        <h2>Built for both sides of the window</h2>
-        <p>
-          TruckTap helps customers find great trucks faster and helps truck owners get seen, shared, and remembered.
-        </p>
-      </div>
+      <div class="container">
+        <div class="owner-panel">
+          <div class="owner-logo">
+            <img src="TruckTapBlack.png" alt="TruckTap full logo" />
+          </div>
 
-      <div class="split">
-        <div class="audience-card">
-          <h3>For customers</h3>
-          <ul>
-            <li>Find trucks that are actually open</li>
-            <li>Discover nearby favorites faster</li>
-            <li>See fresh locations instead of outdated listings</li>
-            <li>Catch trucks before they move on</li>
-          </ul>
-        </div>
+          <div class="owner-copy">
+            <span class="section-kicker">For food truck owners</span>
+            <h2>Be findable when the window is open.</h2>
+            <p>
+              TruckTap helps owners stay visible when location changes, hours shift, and customers are trying to decide where to go right now.
+            </p>
 
-        <div class="audience-card">
-          <h3>For truck owners</h3>
-          <ul>
-            <li>Show customers where you are right now</li>
-            <li>Get discovered by more local fans</li>
-            <li>Stay visible when it matters most</li>
-            <li>Turn live location into repeat business</li>
-          </ul>
+            <ul class="owner-list">
+              <li>Show customers where you are today.</li>
+              <li>Get discovered by nearby hungry people.</li>
+              <li>Turn updates into repeat visits.</li>
+              <li>Build a following beyond social posts.</li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
 
     <section class="section">
-      <div class="cta-panel">
-        <h2>Stop guessing. Start finding.</h2>
-        <p>
-          TruckTap is the better way to discover food trucks near you — built for real trucks,
-          real movement, and real-time local food discovery.
-        </p>
+      <div class="container">
+        <div class="section-head">
+          <span class="section-kicker">TruckTap personality</span>
+          <h2>Helpful, local, and a little bit rowdy.</h2>
+          <p>
+            Food truck culture is fast-moving and human. TruckTap should feel the same: useful first, playful always, and never too polished to understand a pop-up rush.
+          </p>
+        </div>
 
-       <div class="cta-row" style="justify-content:center; margin-bottom:0;">
-  <a href="https://www.facebook.com/profile.php?id=61574337256977" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Follow Launch Updates</a>
-  <a href="#screens" class="btn btn-secondary">See the Screens</a>
-</div>
+        <div class="personality-grid">
+          <article class="personality-card">
+            <h3>No stale-post scavenger hunts.</h3>
+            <p>
+              The promise is simple: help people find trucks that are open, nearby, and worth the trip.
+            </p>
+          </article>
+
+          <article class="personality-card">
+            <h3>Made for real truck chaos.</h3>
+            <p>
+              Moving locations, changing hours, weather calls, sellouts, surprise stops, and everything else that makes food trucks food trucks.
+            </p>
+          </article>
+
+          <article class="personality-card">
+            <h3>Community over corporate.</h3>
+            <p>
+              Customers, owners, sightings, favorites, and updates all make the local food scene easier to follow.
+            </p>
+          </article>
+        </div>
       </div>
     </section>
 
-    <footer class="footer">
-      © 2026 TruckTap. Built for real food truck discovery. Follow us on
-      <a href="https://www.facebook.com/profile.php?id=61574337256977" target="_blank" rel="noopener noreferrer">Facebook</a>.
-    </footer>
-  </div>
+    <section class="section">
+      <div class="container">
+        <div class="cta-panel">
+          <h2>Stop guessing. Start finding.</h2>
+          <p>
+            Download TruckTap and find food trucks that are actually open, actually nearby, and actually worth leaving the house for.
+          </p>
+          <div class="button-row">
+            <a class="btn" href="https://apps.apple.com/us/app/trucktap/id6762240100" target="_blank" rel="noopener noreferrer">Download for iPhone</a>
+            <a class="btn light" href="https://play.google.com/store/apps/details?id=app.rork.trucktap_food_truck_finder_cqgko70&amp;hl=en_US" target="_blank" rel="noopener noreferrer">Download for Android</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <p>&copy; 2026 TruckTap. Built for real food truck discovery.</p>
+        <div class="footer-links">
+          <a href="privacy.html">Privacy</a>
+          <a href="https://www.facebook.com/profile.php?id=61574337256977" target="_blank" rel="noopener noreferrer">Facebook</a>
+        </div>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
