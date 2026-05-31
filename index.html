@@ -921,89 +921,94 @@
       box-shadow: 0 0 0 5px rgba(22, 163, 74, 0.18);
     }
 
-    .rolling-grid {
+    .rolling-carousel {
       position: relative;
       z-index: 1;
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
+      margin-inline: calc(clamp(26px, 5vw, 48px) * -1);
+      padding: 8px 0 12px;
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+      mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    }
+
+    .rolling-track {
+      display: flex;
+      width: max-content;
+      animation: logo-scroll 46s linear infinite;
+      will-change: transform;
+    }
+
+    .rolling-set {
+      display: flex;
+      gap: 18px;
+      padding-right: 18px;
+    }
+
+    .rolling-carousel:hover .rolling-track,
+    .rolling-carousel:focus-within .rolling-track {
+      animation-play-state: paused;
     }
 
     .rolling-card {
       position: relative;
       display: grid;
-      grid-template-columns: 84px minmax(0, 1fr);
-      gap: 14px;
-      align-items: center;
-      min-height: 132px;
-      padding: 14px;
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      border-radius: 24px;
-      box-shadow: 0 16px 38px rgba(0, 0, 0, 0.18);
-      backdrop-filter: blur(12px);
-      transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease, background 0.24s ease;
+      place-items: center;
+      flex: 0 0 clamp(142px, 16vw, 188px);
+      height: clamp(112px, 12vw, 142px);
+      margin: 0;
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      border-radius: 22px;
+      box-shadow:
+        0 18px 40px rgba(0, 0, 0, 0.24),
+        inset 0 1px 0 rgba(255, 255, 255, 0.85);
+      overflow: hidden;
+      transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
     }
 
     .rolling-card::after {
       content: "";
       position: absolute;
-      top: 14px;
-      right: 14px;
-      width: 9px;
-      height: 9px;
-      background: var(--green);
-      border-radius: 999px;
-      box-shadow: 0 0 0 5px rgba(22, 163, 74, 0.14);
+      inset: 0;
+      border-radius: inherit;
+      box-shadow: inset 0 0 0 4px rgba(249, 115, 22, 0.06);
+      pointer-events: none;
     }
 
     .rolling-card:hover {
       z-index: 2;
-      background: rgba(255, 255, 255, 0.14);
-      border-color: rgba(249, 115, 22, 0.46);
+      border-color: rgba(249, 115, 22, 0.56);
       box-shadow:
-        0 24px 52px rgba(0, 0, 0, 0.28),
-        0 0 34px rgba(249, 115, 22, 0.18);
-      transform: translateY(-6px) rotate(-0.4deg);
+        0 24px 52px rgba(0, 0, 0, 0.32),
+        0 0 34px rgba(249, 115, 22, 0.2);
+      transform: translateY(-6px) rotate(-0.35deg);
     }
 
-    .rolling-logo {
-      display: grid;
-      place-items: center;
-      width: 84px;
-      height: 84px;
-      padding: 8px;
-      background: var(--white);
-      border-radius: 20px;
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-      overflow: hidden;
-    }
-
-    .rolling-logo img {
+    .rolling-card img {
       width: 100%;
       height: 100%;
       object-fit: contain;
+      filter: saturate(1.04) contrast(1.02);
     }
 
-    .rolling-card h3 {
-      margin-bottom: 7px;
-      color: var(--white);
-      font-size: 1.05rem;
-      font-weight: 950;
-      letter-spacing: -0.02em;
-      line-height: 1.05;
+    .rolling-note {
+      position: relative;
+      z-index: 1;
+      margin-top: 18px;
+      color: rgba(255, 255, 255, 0.68);
+      font-size: 0.95rem;
+      font-weight: 850;
     }
 
-    .rolling-card span {
-      display: inline-flex;
-      width: fit-content;
-      padding: 6px 9px;
-      color: #ffedd5;
-      background: rgba(249, 115, 22, 0.18);
-      border: 1px solid rgba(249, 115, 22, 0.3);
-      border-radius: 999px;
-      font-size: 0.78rem;
-      font-weight: 900;
+    @keyframes logo-scroll {
+      from {
+        transform: translate3d(0, 0, 0);
+      }
+
+      to {
+        transform: translate3d(-50%, 0, 0);
+      }
     }
 
     .owner-panel {
@@ -1305,6 +1310,113 @@
       transform: rotate(1.2deg);
     }
 
+    .anthem-panel {
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(260px, 360px);
+      gap: clamp(24px, 5vw, 48px);
+      align-items: center;
+      padding: clamp(26px, 5vw, 50px);
+      color: var(--white);
+      background:
+        radial-gradient(circle at 16% 20%, rgba(249, 115, 22, 0.42), transparent 30%),
+        radial-gradient(circle at 90% 88%, rgba(250, 204, 21, 0.16), transparent 26%),
+        linear-gradient(135deg, #080b12 0%, #111827 58%, #2b1509 100%);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 34px;
+      box-shadow: var(--shadow);
+    }
+
+    .anthem-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+        linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+      background-size: 42px 42px;
+      opacity: 0.1;
+      pointer-events: none;
+    }
+
+    .anthem-copy,
+    .anthem-video-card {
+      position: relative;
+      z-index: 1;
+    }
+
+    .anthem-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      width: fit-content;
+      margin-bottom: 16px;
+      padding: 10px 13px;
+      color: #431407;
+      background: var(--gold);
+      border: 3px solid #050505;
+      border-radius: 999px;
+      box-shadow: 6px 6px 0 #050505;
+      font-size: 0.78rem;
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .anthem-badge::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      background: var(--orange);
+      border-radius: 999px;
+      box-shadow: 0 0 0 5px rgba(249, 115, 22, 0.2);
+    }
+
+    .anthem-copy h2 {
+      max-width: 620px;
+      color: var(--white);
+    }
+
+    .anthem-copy p {
+      max-width: 560px;
+      margin-top: 14px;
+      color: rgba(255, 255, 255, 0.74);
+      font-size: 1.08rem;
+    }
+
+    .anthem-video-link {
+      margin-top: 24px;
+    }
+
+    .anthem-video-card {
+      overflow: hidden;
+      padding: 10px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 248, 239, 0.9));
+      border: 1px solid rgba(255, 255, 255, 0.68);
+      border-radius: 28px;
+      box-shadow:
+        0 28px 64px rgba(0, 0, 0, 0.34),
+        0 0 34px rgba(249, 115, 22, 0.18);
+    }
+
+    .anthem-video-frame {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 9 / 16;
+      width: 100%;
+      background: #050505;
+      border-radius: 20px;
+    }
+
+    .anthem-video-frame iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
     .lightbox {
       position: fixed;
       inset: 0;
@@ -1445,8 +1557,10 @@
       }
 
       .hero,
-      .phone-collage {
+      .phone-collage,
+      .rolling-track {
         animation: none !important;
+        transform: none !important;
       }
 
       .store-badge:hover,
@@ -1457,6 +1571,7 @@
       .chaos-tag:hover,
       .phone-card:hover,
       .floating-shot:hover,
+      .anthem-video-card:hover,
       .compare-card:hover,
       .step-card:hover,
       .personality-card:hover,
@@ -1505,6 +1620,7 @@
 
       .hero,
       .community,
+      .anthem-panel,
       .owner-panel {
         grid-template-columns: 1fr;
       }
@@ -1533,8 +1649,8 @@
         grid-column: auto;
       }
 
-      .rolling-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+      .rolling-track {
+        animation-duration: 40s;
       }
     }
 
@@ -1575,9 +1691,15 @@
       .steps,
       .personality-grid,
       .seen-grid,
+      .anthem-panel,
       .rolling-head,
       .owner-list {
         grid-template-columns: 1fr;
+      }
+
+      .anthem-video-card {
+        width: min(100%, 360px);
+        margin: 0 auto;
       }
 
       .rolling-badge {
@@ -1679,24 +1801,25 @@
         grid-template-columns: 1fr;
       }
 
-      .rolling-grid {
-        grid-template-columns: 1fr;
-      }
-
       .rolling-card {
-        grid-template-columns: 72px minmax(0, 1fr);
-        min-height: 112px;
-      }
-
-      .rolling-logo {
-        width: 72px;
-        height: 72px;
+        flex-basis: 132px;
+        height: 104px;
+        padding: 13px;
         border-radius: 18px;
       }
 
       .seen-card,
       .seen-note {
         min-height: 240px;
+      }
+
+      .anthem-panel {
+        padding: 24px 18px;
+        border-radius: 28px;
+      }
+
+      .anthem-video-card {
+        border-radius: 22px;
       }
 
       .screen-card {
@@ -1920,115 +2043,6 @@
       </div>
     </section>
 
-    <section class="section">
-      <div class="container">
-        <div class="rolling-panel">
-          <div class="rolling-head">
-            <div>
-              <span class="section-kicker">Local trucks, live momentum</span>
-              <h2>Already Rolling with TruckTap</h2>
-              <p>
-                More trucks joining weekly. Real food trucks. Real communities. Real hungry people.
-              </p>
-            </div>
-            <div class="rolling-badge">More joining every week</div>
-          </div>
-
-          <div class="rolling-grid" aria-label="Food trucks already rolling with TruckTap">
-            <article class="rolling-card">
-              <div class="rolling-logo">
-                <img src="trucks/big papa jakes.jpg" alt="Big Papa Jakes logo" />
-              </div>
-              <div>
-                <h3>Big Papa Jakes</h3>
-                <span>Rolling soon</span>
-              </div>
-            </article>
-
-            <article class="rolling-card">
-              <div class="rolling-logo">
-                <img src="trucks/cupcake caboose.jpg" alt="Cupcake Caboose logo" />
-              </div>
-              <div>
-                <h3>Cupcake Caboose</h3>
-                <span>Sweet stops</span>
-              </div>
-            </article>
-
-            <article class="rolling-card">
-              <div class="rolling-logo">
-                <img src="trucks/eltacorico.png" alt="El Taco Rico logo" />
-              </div>
-              <div>
-                <h3>El Taco Rico</h3>
-                <span>Tacos on tap</span>
-              </div>
-            </article>
-
-            <article class="rolling-card">
-              <div class="rolling-logo">
-                <img src="trucks/everetts sweets.jpg" alt="Everetts Sweets logo" />
-              </div>
-              <div>
-                <h3>Everetts Sweets</h3>
-                <span>Dessert run</span>
-              </div>
-            </article>
-
-            <article class="rolling-card">
-              <div class="rolling-logo">
-                <img src="trucks/ice ice shavy.jpg" alt="Ice Ice Shavy logo" />
-              </div>
-              <div>
-                <h3>Ice Ice Shavy</h3>
-                <span>Cool treats</span>
-              </div>
-            </article>
-
-            <article class="rolling-card">
-              <div class="rolling-logo">
-                <img src="trucks/j mos.jpg" alt="J Mos logo" />
-              </div>
-              <div>
-                <h3>J Mos</h3>
-                <span>Local flavor</span>
-              </div>
-            </article>
-
-            <article class="rolling-card">
-              <div class="rolling-logo">
-                <img src="trucks/oktober feast1.jpg" alt="Oktober Feast logo" />
-              </div>
-              <div>
-                <h3>Oktober Feast</h3>
-                <span>Event ready</span>
-              </div>
-            </article>
-
-            <article class="rolling-card">
-              <div class="rolling-logo">
-                <img src="trucks/papa pasta.jpg" alt="Papa Pasta logo" />
-              </div>
-              <div>
-                <h3>Papa Pasta</h3>
-                <span>Pasta pop-up</span>
-              </div>
-            </article>
-
-            <article class="rolling-card">
-              <div class="rolling-logo">
-                <img src="trucks/thestationlogo.png" alt="The Station logo" />
-              </div>
-              <div>
-                <h3>The Station</h3>
-                <span>Community stop</span>
-              </div>
-            </article>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <section class="section" id="owners">
       <div class="container">
         <div class="owner-panel">
@@ -2129,6 +2143,57 @@
       </div>
     </section>
 
+    <section class="section" aria-labelledby="anthem-title">
+      <div class="container">
+        <div class="anthem-panel">
+          <div class="anthem-copy">
+            <div class="anthem-badge">Fresh out of the fryer</div>
+            <h2 id="anthem-title">The TruckTap Anthem</h2>
+            <p>Yes, the food truck app has its own soundtrack.</p>
+            <div class="button-row anthem-video-link">
+              <a class="btn light" href="https://youtube.com/shorts/rpr4vHIFAHY?feature=share" target="_blank" rel="noopener noreferrer">
+                Watch on YouTube
+              </a>
+            </div>
+          </div>
+
+          <div class="anthem-video-card">
+            <div class="anthem-video-frame">
+              <iframe
+                src="https://www.youtube.com/embed/rpr4vHIFAHY"
+                title="The TruckTap Anthem"
+                loading="lazy"
+                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="rolling-panel">
+          <div class="rolling-head">
+            <div>
+              <span class="section-kicker">Local trucks, live momentum</span>
+              <h2>Already Rolling with TruckTap</h2>
+              <p>
+                More than 33 food trucks are already using TruckTap to help customers find them.
+              </p>
+            </div>
+            <div class="rolling-badge">33 trucks and growing</div>
+          </div>
+
+          <div class="rolling-carousel" aria-label="Food trucks already rolling with TruckTap">
+            <div class="rolling-track" data-truck-logo-track></div>
+          </div>
+          <p class="rolling-note">New trucks join every week.</p>
+        </div>
+      </div>
+    </section>
+
     <section class="section">
       <div class="container">
         <div class="cta-panel">
@@ -2169,6 +2234,75 @@
   </div>
 
   <script>
+    const truckLogoFiles = [
+      "502Cakery.jpg",
+      "AcmeChickenBowls.jpeg",
+      "archiessnowballs.jpg",
+      "balcoFunnels.jpg",
+      "big papa jakes.jpg",
+      "cupcake caboose.jpg",
+      "dropitlikeitstot.jpg",
+      "eltacorico.png",
+      "everetts sweets.jpg",
+      "exqueezeme.jpg",
+      "getsauced.jpg",
+      "guerossalsa.png",
+      "hillbillyhaven.png",
+      "ice ice shavy.jpg",
+      "itsforkingood.jpg",
+      "j mos.jpg",
+      "miss steaks.jpg",
+      "mommarose.jpg",
+      "oktober feast1.jpg",
+      "papa pasta.jpg",
+      "pelonstacos.jpg",
+      "picodegallo.png",
+      "poppysdogs.jpg",
+      "quenchlemonade.jpg",
+      "r&bbbq.png",
+      "smashnroll.jpg",
+      "snobros.jpg",
+      "streetsgyros.jpg",
+      "thecookingleprechaun.jpg",
+      "thepizzaguys.jpg",
+      "thestationlogo.png"
+    ];
+
+    const truckLogoTrack = document.querySelector("[data-truck-logo-track]");
+
+    function createTruckLogoCard(fileName, isDuplicate) {
+      const card = document.createElement("figure");
+      const image = document.createElement("img");
+
+      card.className = "rolling-card";
+      card.setAttribute("aria-hidden", isDuplicate ? "true" : "false");
+      image.src = "trucks/" + fileName;
+      image.alt = isDuplicate ? "" : "Food truck logo";
+      image.loading = "lazy";
+      image.decoding = "async";
+
+      card.appendChild(image);
+      return card;
+    }
+
+    if (truckLogoTrack) {
+      const fragment = document.createDocumentFragment();
+
+      [false, true].forEach(function (isDuplicate) {
+        const set = document.createElement("div");
+        set.className = "rolling-set";
+        set.setAttribute("aria-hidden", isDuplicate ? "true" : "false");
+
+        truckLogoFiles.forEach(function (fileName) {
+          set.appendChild(createTruckLogoCard(fileName, isDuplicate));
+        });
+
+        fragment.appendChild(set);
+      });
+
+      truckLogoTrack.appendChild(fragment);
+    }
+
     const lightbox = document.querySelector("[data-lightbox]");
     const lightboxImage = document.querySelector("[data-lightbox-image]");
     const lightboxClose = document.querySelector("[data-lightbox-close]");
