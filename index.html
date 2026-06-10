@@ -2308,7 +2308,7 @@
         set.className = "rolling-set";
         set.setAttribute("aria-hidden", isDuplicate ? "true" : "false");
 
-        truckLogoFiles.forEach(function (fileName) {
+        fileNames.forEach(function (fileName) {
           set.appendChild(createTruckLogoCard(fileName, isDuplicate));
         });
 
